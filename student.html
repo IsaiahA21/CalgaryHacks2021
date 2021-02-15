@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Student </title>
+    <link rel="icon" type="image/png" href="unicorn.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap JS -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script> -->
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+
+    <!--Trying the sidebar-->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style2.css" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+    <!-- jQuery Custom Scroller CDN controlls Toggle Sidebar!-->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Font Awesome JS for hamberger button-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal",
+            });
+
+            $("#sidebarCollapse").on("click", function () {
+                $("#sidebar, #content").toggleClass("active");
+                $(".collapse.in").toggleClass("in");
+                $("a[aria-expanded=true]").attr("aria-expanded", "false");
+            });
+        });
+
+    </script>
+    <!--end of sidebar-->
+
+    <!-- Testing if dropdown works -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="chatWithBot.css">
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        $(function () {
+            var socket = io();
+            $('form').submit(function (e) {
+                e.preventDefault(); // prevents page reloading
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+            socket.on('chat history', function (msg) {
+                $('#messages').empty();
+                for (x of msg) {
+
+                    //$('#messages').prepend("<li" + colorHTML + ">" + x + "</li>");
+                    $('#messages').prepend("<li>"
+                        + x + "</li>");
+
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <!--Navigation bar-->
+            <div id="nav-placeholder">
+            </div>
+            <script>
+                $.get("sidebar.html", function (data) {
+                    $("#nav-placeholder").replaceWith(data);
+                });
+            </script>
+        </div>
+
+        <!-- Page Content  -->
+        <div id="content" style="padding-left: 3%; padding-top:6%;">
+            <h2> Chat with Students</h2>
+            <p>
+                Chat with other students (rooms pending)
+            </p>
+
+            <div class="row">
+                <div class="col-sm">
+                    <div id="messagesDiv">
+                        <div d="buttonFlex">
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#question1">Question
+                                1</button>
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#question2">Question
+                                2</button>
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#question3">Question
+                                3</button>
+                        </div>
+                        <div class="messagesDivClass" id=messagesContainer>
+                            <ul id="messages">
+                                <li>Chattie: This is the assignment 2 - question 3 chatroom. Please be polite!</li>
+                                <li class="userMessage">Rebecca: I cannot for the life of me figure out how to center a
+                                    div in css. Did anyone get it?</li>
+                                <li>Isaiah: Homie, check this link out:
+                                    https://stackoverflow.com/questions/114543/how-to-horizontally-center-an-element
+                                </li>
+                                <li class="userMessage">Wow! Thanks, that really helped</li>
+                                <li style="color:blue;"><b>Prof. Gavin: Thanks for helping, Isaiah. 👍 </b></li>
+                            </ul>
+                        </div>
+                        <form id="messageID" class="formClass" action="">
+                            <input id="m" autocomplete="off" /><button>Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

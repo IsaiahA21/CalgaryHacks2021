@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ask a question</title>
+    <link rel="icon" type="image/png" href="unicorn.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap JS -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script> -->
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+
+    <!--Trying the sidebar-->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style2.css" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+    <!-- jQuery Custom Scroller CDN controlls Toggle Sidebar!-->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Font Awesome JS for hamberger button-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal",
+            });
+
+            $("#sidebarCollapse").on("click", function () {
+                $("#sidebar, #content").toggleClass("active");
+                $(".collapse.in").toggleClass("in");
+                $("a[aria-expanded=true]").attr("aria-expanded", "false");
+            });
+        });
+
+    </script>
+    <!--end of sidebar-->
+
+    <!-- Testing if dropdown works -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="chatWithBot.css">
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        $(function () {
+            var socket = io();
+            $('form').submit(function (e) {
+                e.preventDefault(); // prevents page reloading
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+            socket.on('chat history', function (msg) {
+                $('#messages').empty();
+                for (x of msg) {
+
+                    //$('#messages').prepend("<li" + colorHTML + ">" + x + "</li>");
+                    $('#messages').prepend("<li>"
+                        + x + "</li>");
+
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <!--Navigation bar-->
+            <div id="nav-placeholder">
+            </div>
+            <script>
+                $.get("sidebar.html", function (data) {
+                    $("#nav-placeholder").replaceWith(data);
+                });
+            </script>
+        </div>
+        <!-- Page Content  -->
+        <div id="content" style="padding-left: 3%; padding-top:6%;">
+            <h2> Ask a Question</h2>
+            <p>
+                Ask the bot a question, and see results
+            </p>
+            <div class="row">
+                <div class="col-6">
+                    <h3> Results</h3>
+                    <button type="button" style="background-color: #6d7fcc;" class="btn btn-info" data-toggle="collapse"
+                        data-target="#question1">Question
+                        1</button>
+
+                    <button type="button" style="background-color: #6d7fcc;" class="btn btn-info" data-toggle="collapse"
+                        data-target="#question2">Question
+                        2</button>
+
+                    <button type="button" style="background-color: #6d7fcc;" class="btn btn-info" data-toggle="collapse"
+                        data-target="#question3">Question
+                        3</button>
+                    <div id="question1" class="collapse">
+                        <pre> Immediately before the collision, 
+the momentum of the locomotive–car system is
+A. 5.01 × 105 kg.m/s, 68.2° north of east
+B. 5.01 × 105 kg.m/s, 3.43° north of east
+C. 5.30 × 105 kg.m/s, 68.2° north of east
+D. 5.30 × 105 kg.m/s, 3.43° north of east</pre>
+                        <img src="CalgaryHackAssignmentQ1.PNG" alt="CalgaryHackAssignmentQ1" style="max-width: 60%;">
+                    </div>
+                    <div id="question2" class="collapse">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                        veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <div id="question3" class="collapse">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                        veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div id="messagesDiv">
+                        <div class="messagesDivClass" id=messagesContainer>
+                            <ul id="messages">
+                                <li>Chattie: Hello Rebecca!</li>
+                                <li>Chattie: Is your question about an assignment? If so, which? Otherwise, keep typing
+                                    to see results for your question.</li>
+                                <li class="userMessage">Rebecca: Assignment 2</li>
+                                <li>Chattie: Great! Here's some info about Assignment 2 Questions.</li>
+                                <li>Chattie: Which question did you want to ask about?</li>
+                            </ul>
+                        </div>
+                        <!-- <div d="buttonFlex">
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#question1">Question
+                                1</button>
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#question2">Question
+                                2</button>
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#question3">Question
+                                3</button>
+                            <button type="button" style="background-color: #6d7fcc;" class="btn btn-info"
+                                data-toggle="collapse" data-target="#prof">Prof
+                            </button>
+                        </div> -->
+                        <form id="messageID" class="formClass" action="">
+                            <input id="m" autocomplete="off" placeholder="Question 1, 2, or 3" /><button>Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

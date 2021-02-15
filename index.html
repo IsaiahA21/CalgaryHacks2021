@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Unicomm Home</title>
+    <link rel="icon" type="image/png" href="unicorn.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+
+    <!--Trying the sidebar-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style2.css" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+    <!-- jQuery Custom Scroller CDN -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!--end of sidebar-->
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal",
+            });
+
+            $("#sidebarCollapse").on("click", function () {
+                $("#sidebar, #content").toggleClass("active");
+                $(".collapse.in").toggleClass("in");
+                $("a[aria-expanded=true]").attr("aria-expanded", "false");
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-2">
+            <!--Navigation bar-->
+            <div id="nav-placeholder">
+            </div>
+            <script>
+                $.get("sidebar.html", function (data) {
+                    $("#nav-placeholder").replaceWith(data);
+                });
+            </script>
+        </div>
+
+        <div id="content" class="col-10" style="padding-left: 3%; padding-top:6%;">
+            <h2>Welcome to Unicomm!</h2>
+            <p>
+                Unicomm is a website that allows students to interact with their professor seamlessly.
+                It provides professors a site where they can easily place assignments, and extra materials for students
+                to
+                work
+                on.
+                Students can find solutions to exercises problem quickly and look at the recommended YouTube video on a
+                certain
+                topic(s).
+                Additonally, the site provides a chat function where, using a bot, they can find solutions to the
+                problem if
+                it
+                was asked by
+                another student and the question were answered. The bot can also provide them with links to the exericse
+                questions and solution and a youtube video.
+                If the question has not been answered yet, the bot also connects students to anohter students suck on a
+                similar
+                question. And finally,
+                the bot allows students to interact with their professor. The professor is provided with a digital
+                whiteboard
+                where they can work, step by step,
+                through a problem with a student.
+                Lastly the student could view their professor calender and find an open office hour to get a more
+                in-depth
+                response to their question.
+
+
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
